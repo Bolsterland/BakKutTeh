@@ -1,0 +1,75 @@
+<script src="vue.js"></script>
+
+<style type="text/css">
+
+.demo {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    display: inline-block;
+    margin: 10px;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green{
+    background-color: green;
+}
+
+</style>
+
+<div id="app">
+    <div class="demo" @click="isRed = !isRed" :class="{red: isRed}"></div>
+    <div class="demo" @click="isBlue = !isBlue" :class="{blue: isBlue}"></div>
+    <div class="demo" @click="isGreen = !isGreen" :class="{green: isGreen}"></div>
+    <br>
+    <div class="demo" :class="divClasses"></div>
+    <div class="demo" :class="[color, {red: isRed}]"></div>
+    <div class="demo" :style="{backgroundColor: color2}"></div>
+    <hr>
+    <input type="text" v-model="color">
+    <hr>
+    <input type="text" v-model="color2">
+    <input type="text" v-model="width">
+    <input type="text" v-model="height">
+    <hr>
+    <div class="demo" :style="sizing"></div>
+    <div class="demo" :style="[{backgroundColor: color}, {width: width + 'px'}, {height: width + 'px'}]"></div>
+
+</div>
+
+<script>
+    new Vue ({
+        el: '#app',
+        data: {
+            isRed: false,
+            isBlue: false,
+            isGreen: false,
+            color: 'green',
+            color2: 'blue',
+            width: 100,
+            height: 100
+        },
+        computed: {
+            divClasses: function() {
+                return {
+                    red: this.isRed,
+                    blue: !this.isRed
+                };
+            },
+            sizing: function() {
+                return{
+                    backgroundColor: this.color2,
+                    width: this.width + 'px',
+                    height: this.height + 'px'
+                };
+            }
+        }
+    })
+</script>

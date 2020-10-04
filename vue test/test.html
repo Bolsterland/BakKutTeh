@@ -1,0 +1,37 @@
+<html>
+<head>
+<script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+<input type="text" v-on:input="changeTitle">
+<h1 v-once>{{ title }}</h1>
+<p>{{ sayHello() }}</p>
+<p>{{ sayWelcome() }} <a v-bind:href="link">Click here!</a></p>
+<hr>
+<p v-html="htmlLink"></p>
+</div>
+<script>
+new Vue({
+	el: '#app',
+	data: {
+		title: 'Hello World!',
+		welcome: 'Welcome to Bolsterland!',
+		link: 'http://google.com',
+		htmlLink: '<a href="http://google.com">Click here!</a>'
+	},
+	methods: {
+		changeTitle: function(event) {
+			this.title = event.target.value;
+			},
+		sayWelcome: function() {
+			return this.welcome;
+		},
+		sayHello: function() {
+			return this.title;
+		}
+	}
+});
+</script>
+</body>	
+</html>
