@@ -1,0 +1,68 @@
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<div id="exercise">
+    <p v-once>VueJS is pretty cool - {{ name }} - {{ age }}</p>
+    <p v-once>{{ ageMulti() }}</p>
+    <p v-once>{{ randomNum() }}</p>
+    <div>
+        <img style="width:300px;height:200px" v-bind:src="imgSrc">
+    </div>
+    <br>
+    <div>
+        <input v-once type="text" v-bind:value="age" v-on:input="changeAge">
+        <p>Age: {{ age }} {{ age > 21 ? 'You are now legally an adult!' : 'Permission not granted!'}}</p>
+    </div>
+    <br>
+    <button v-on:click="increaseAge()">Add Age</button>
+    <p v-on:mousemove="updateCoordinates">
+        Location Coordinates: {{ x }} / {{ y }}
+        - <span v-on:mousemove.stop="">DEAD SPOT</span>
+    </p>
+    <input type="text" v-on:keyup.enter.space ="alertMe">
+    <hr>
+    <div>
+        <button v-on:click="increase(2, $event)">Click me!</button>
+        <button v-on:click="counter++">Click me!</button>
+        <p>{{ counter * 2 }}</p>
+        <p>{{ counter * 2 > 20 ? 'Greater than 20' : 'Smaller than 20'}}</p>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#exercise',
+        data: {
+            name: 'Zhe Jing',
+            age: 22,
+            imgSrc: 'https://i.redd.it/1m2qdyfwtcr31.png',
+            x: 0,
+            y: 0,
+            counter: 0
+        },
+        methods: {
+            ageMulti: function() {
+                newAge = this.age*3;
+                return newAge;
+            },
+            randomNum: function() {
+                return Math.random();
+            },
+            changeAge: function(event) {
+                this.age = event.target.value;
+            },
+            increaseAge: function() {
+                this.age ++;
+            },
+            updateCoordinates: function(event) {
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
+            alertMe: function(){
+                alert('Warning!');
+            },
+            increase: function(step, event){
+                this.counter += step;
+            }
+        }
+    });
+</script>
