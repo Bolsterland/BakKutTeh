@@ -50,7 +50,8 @@ const app = Vue.createApp({
             this.winner = 'monster';
         }, 
         addLogMessage(who, what, value) {
-            
+            message = who + 'hits ' + what + 'with ' + value + ' of damage!';
+            this.logMessages.push(message)
         }
     },
     computed: {
